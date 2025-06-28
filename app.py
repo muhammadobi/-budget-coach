@@ -448,7 +448,7 @@ elif page == "💰 Budget Targets":
         st.subheader("📈 Budget vs Actual Spending")
         transactions_df = db.get_transactions(filter_start_date, filter_end_date)
         
-        budget_chart = visualizer.create_budget_vs_actual(transactions_df, budget_targets)
+        budget_chart = visualizer.create_budget_vs_actual_chart(transactions_df, budget_targets)
         if budget_chart:
             st.plotly_chart(budget_chart, use_container_width=True)
         else:

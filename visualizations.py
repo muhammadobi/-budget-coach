@@ -140,40 +140,7 @@ class BudgetVisualizer:
         
         return fig
     
-    def create_budget_vs_actual(self, transactions_df, budget_limits):
-        """Create a comparison chart of budget vs actual spending by category"""
-        if transactions_df.empty or not budget_limits:
-            return None
-        
-        current_month = datetime.now().strftime('%Y-%m')
-        monthly_data = transactions_df[
-            (transactions_df['date'].str.startswith(current_month)) &
-            (transactions_df['type'] == 'expense')
-        ]
-        
-        if monthly_data.empty:
-            return None
-        
-        actual_spending = monthly_data.groupby('category')['amount'].sum()
-        
-        categories = list(budget_limits.keys())
-        budget_amounts = [budget_limits[cat] for cat in categories]
-        actual_amounts = [actual_spending.get(cat, 0) for cat in categories]
-        
-        fig = go.Figure(data=[
-            go.Bar(name='Budget', x=categories, y=budget_amounts, marker_color='lightblue'),
-            go.Bar(name='Actual', x=categories, y=actual_amounts, marker_color='darkred')
-        ])
-        
-        fig.update_layout(
-            barmode='group',
-            title='Budget vs Actual Spending',
-            xaxis_title='Category',
-            yaxis_title='Amount ($)',
-            height=400
-        )
-        
-        return fig
+
     
     def create_income_breakdown(self, transactions_df):
         """Create a pie chart showing income sources"""
@@ -206,80 +173,104 @@ class BudgetVisualizer:
         if total_income <= 0:
             return None
         
-        needs_pct = (needs_spending / total_income) * 100
-        wants_pct = (wants_spending / total_income) * 100
-        savings_pct = 100 - needs_pct - wants_pct
+        try:
+            needs_pct = (needs_spending / total_income) * 100
+            wants_pct = (wants_spending / total_income) * 100
+            savings_pct = 100 - needs_pct - wants_pct
+            
+            fig = make_subplots(
+                rows=1, cols=3,
+                specs=[[{'type': 'indicator'}, {'type': 'indicator'}, {'type': 'indicator'}]],
+                subplot_titles=("Needs (50%)", "Wants (30%)", "Savings (20%)")
+            )
         
-        fig = make_subplots(
-            rows=1, cols=3,
-            specs=[[{'type': 'indicator'}, {'type': 'indicator'}, {'type': 'indicator'}]],
-            subtitle_text="50/30/20 Rule Analysis"
-        )
-        
-        fig.add_trace(go.Indicator(
-            mode="gauge+number+delta", value=needs_pct,
-            title={'text': "Needs (50%)"},
-            delta={'reference': 50},
-            gauge={'axis': {'range': [None, 100]}, 'bar': {'color': "darkblue"}}
-        ), row=1, col=1)
-        
-        fig.add_trace(go.Indicator(
-            mode="gauge+number+delta", value=wants_pct,
-            title={'text': "Wants (30%)"},
-            delta={'reference': 30},
-            gauge={'axis': {'range': [None, 100]}, 'bar': {'color': "darkgreen"}}
-        ), row=1, col=2)
-        
-        fig.add_trace(go.Indicator(
-            mode="gauge+number+delta", value=savings_pct,
-            title={'text': "Savings (20%)"},
-            delta={'reference': 20},
-            gauge={'axis': {'range': [None, 100]}, 'bar': {'color': "purple"}}
-        ), row=1, col=3)
-        
-        fig.update_layout(height=300, showlegend=False)
-        return fig
+            fig.add_trace(go.Indicator(
+                mode="gauge+number+delta", value=needs_pct,
+                title={'text': "Needs"},
+                delta={'reference': 50},
+                gauge={'axis': {'range': [None, 100]}, 'bar': {'color': "darkblue"}}
+            ), row=1, col=1)
+            
+            fig.add_trace(go.Indicator(
+                mode="gauge+number+delta", value=wants_pct,
+                title={'text': "Wants"},
+                delta={'reference': 30},
+                gauge={'axis': {'range': [None, 100]}, 'bar': {'color': "darkgreen"}}
+            ), row=1, col=2)
+            
+            fig.add_trace(go.Indicator(
+                mode="gauge+number+delta", value=savings_pct,
+                title={'text': "Savings"},
+                delta={'reference': 20},
+                gauge={'axis': {'range': [None, 100]}, 'bar': {'color': "purple"}}
+            ), row=1, col=3)
+            
+            fig.update_layout(height=300, showlegend=False)
+            return fig
+            
+        except Exception as e:
+            # Return a simple bar chart if gauge charts fail
+            needs_pct_safe = (needs_spending / total_income) * 100 if total_income > 0 else 0
+            wants_pct_safe = (wants_spending / total_income) * 100 if total_income > 0 else 0
+            savings_pct_safe = 100 - needs_pct_safe - wants_pct_safe
+            
+            fig = go.Figure(data=[
+                go.Bar(name='Current', x=['Needs', 'Wants', 'Savings'], 
+                       y=[needs_pct_safe, wants_pct_safe, savings_pct_safe]),
+                go.Bar(name='Target', x=['Needs', 'Wants', 'Savings'], 
+                       y=[50, 30, 20], opacity=0.6)
+            ])
+            fig.update_layout(
+                title="50/30/20 Rule Analysis (Fallback View)",
+                yaxis_title="Percentage (%)",
+                height=300,
+                barmode='group'
+            )
+            return fig
     
-    def create_budget_vs_actual(self, transactions_df, budget_targets_df):
+    def create_budget_vs_actual_chart(self, transactions_df, budget_targets_df):
         """Create a comparison chart of budget vs actual spending by category"""
-        if transactions_df.empty or budget_targets_df.empty:
-            return None
-        
-        current_month = datetime.now().strftime('%Y-%m')
-        monthly_data = transactions_df[
-            (transactions_df['date'].str.startswith(current_month)) &
-            (transactions_df['type'] == 'expense')
-        ]
-        
-        if monthly_data.empty:
-            return None
-        
-        actual_spending = monthly_data.groupby('category')['amount'].sum()
-        
-        # Create budget targets dictionary
-        budget_targets = dict(zip(budget_targets_df['category'], budget_targets_df['monthly_target']))
-        
-        # Get all categories that have either budget or actual spending
-        all_categories = set(budget_targets.keys()) | set(actual_spending.index)
-        
-        categories = list(all_categories)
-        budget_amounts = [budget_targets.get(cat, 0) for cat in categories]
-        actual_amounts = [actual_spending.get(cat, 0) for cat in categories]
-        
-        fig = go.Figure(data=[
-            go.Bar(name='Budget Target', x=categories, y=budget_amounts, 
-                   marker_color='lightblue', opacity=0.7),
-            go.Bar(name='Actual Spending', x=categories, y=actual_amounts, 
-                   marker_color='darkred', opacity=0.8)
-        ])
-        
-        fig.update_layout(
-            barmode='group',
-            title='Budget vs Actual Spending (Current Month)',
-            xaxis_title='Category',
-            yaxis_title='Amount ($)',
-            height=400,
-            showlegend=True
-        )
-        
-        return fig 
+        try:
+            if transactions_df.empty or budget_targets_df.empty:
+                return None
+            
+            current_month = datetime.now().strftime('%Y-%m')
+            monthly_data = transactions_df[
+                (transactions_df['date'].str.startswith(current_month)) &
+                (transactions_df['type'] == 'expense')
+            ]
+            
+            if monthly_data.empty:
+                return None
+            
+            actual_spending = monthly_data.groupby('category')['amount'].sum()
+            
+            # Create budget targets dictionary
+            budget_targets = dict(zip(budget_targets_df['category'], budget_targets_df['monthly_target']))
+            
+            # Get all categories that have either budget or actual spending
+            all_categories = set(budget_targets.keys()) | set(actual_spending.index)
+            
+            categories = list(all_categories)
+            budget_amounts = [budget_targets.get(cat, 0) for cat in categories]
+            actual_amounts = [actual_spending.get(cat, 0) for cat in categories]
+            
+            fig = go.Figure(data=[
+                go.Bar(name='Budget Target', x=categories, y=budget_amounts, 
+                       marker_color='lightblue', opacity=0.7),
+                go.Bar(name='Actual Spending', x=categories, y=actual_amounts, 
+                       marker_color='darkred', opacity=0.8)
+            ])
+            
+            fig.update_layout(
+                barmode='group',
+                title='Budget vs Actual Spending (Current Month)',
+                xaxis_title='Category',
+                yaxis_title='Amount ($)',
+                height=400,
+                showlegend=True
+            )
+            
+            return fig
+        except Exception as e:
+            return None 
