@@ -1,0 +1,40 @@
+{
+  "tips": [
+    {
+      "id": 1,
+      "title": "The 50/30/20 Rule",
+      "content": "**The 50/30/20 budgeting rule is a simple way to manage your money:**\n\n- **50% for Needs**: Essential expenses like rent, groceries, utilities\n- **30% for Wants**: Entertainment, dining out, hobbies\n- **20% for Savings**: Emergency fund, retirement, debt payment\n\nThis rule helps ensure you're living within your means while building wealth!",
+      "category": "budgeting"
+    },
+    {
+      "id": 2,
+      "title": "Emergency Fund Basics",
+      "content": "**An emergency fund is your financial safety net:**\n\n- Aim for 3-6 months of expenses\n- Keep it in a separate, easily accessible account\n- Only use for true emergencies (job loss, medical bills, major repairs)\n- Start small - even $500 can help avoid debt\n\nBuilding an emergency fund reduces financial stress and prevents debt!",
+      "category": "savings"
+    },
+    {
+      "id": 3,
+      "title": "Understanding Compound Interest",
+      "content": "**Compound interest is the most powerful force in finance:**\n\n- You earn interest on both your original money AND previous interest\n- Time is your biggest advantage - start investing early\n- Even small amounts compound significantly over time\n- Example: $100/month for 30 years at 7% = $121,997!\n\nEinstein called it \"the eighth wonder of the world\" for good reason!",
+      "category": "investing"
+    },
+    {
+      "id": 4,
+      "title": "Automating Your Savings",
+      "content": "**Did you know? Automating your savings helps build discipline.**\n\n- Set up automatic transfers to savings accounts\n- Pay yourself first - save before spending\n- Start with just $25/week if money is tight\n- Increase the amount by $5 every few months\n\nAutomation removes the temptation to spend instead of save!",
+      "category": "savings"
+    },
+    {
+      "id": 5,
+      "title": "Tracking Your Net Worth",
+      "content": "**Net worth = Assets - Liabilities:**\n\n- **Assets**: Cash, investments, property you own\n- **Liabilities**: Debts, loans, credit card balances\n- Track monthly to see your financial progress\n- Focus on increasing assets and decreasing liabilities\n\nNet worth is the best measure of your overall financial health!",
+      "category": "tracking"
+    },
+    {
+      "id": 6,
+      "title": "Smart Credit Card Usage",
+      "content": "**Credit cards can be powerful tools when used wisely:**\n\n- Pay the full balance every month to avoid interest\n- Keep utilization below 30% of your credit limit\n- Use cards for rewards and purchase protection\n- Never spend money you don't have\n\nResponsible credit card use builds credit and provides benefits!",
+      "category": "credit"
+    }
+  ]
+} 
