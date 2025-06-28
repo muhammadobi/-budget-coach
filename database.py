@@ -53,12 +53,20 @@ class BudgetDatabase:
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 email TEXT UNIQUE NOT NULL,
                 name TEXT,
+                password_hash TEXT,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 last_login TIMESTAMP,
                 login_count INTEGER DEFAULT 1,
                 is_active BOOLEAN DEFAULT 1
             )
         ''')
+        
+        # Add password_hash column if it doesn't exist (for existing databases)
+        try:
+            cursor.execute('ALTER TABLE users ADD COLUMN password_hash TEXT')
+        except sqlite3.OperationalError:
+            # Column already exists
+            pass
         
         # Create user sessions table
         cursor.execute('''
@@ -251,13 +259,68 @@ class BudgetDatabase:
         return user_id
     
     def get_user(self, email):
-        """Get user by email"""
+        """Get user by email (legacy method)"""
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM users WHERE email = ?", (email,))
         user = cursor.fetchone()
         conn.close()
         return user
+    
+    def get_user_by_email(self, email):
+        """Get user by email with dictionary format"""
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT id, email, name, password_hash, created_at, last_login, login_count, is_active 
+            FROM users WHERE email = ? AND is_active = 1
+        """, (email,))
+        row = cursor.fetchone()
+        conn.close()
+        
+        if row:
+            return {
+                'id': row[0],
+                'email': row[1],
+                'name': row[2],
+                'password_hash': row[3],
+                'created_at': row[4],
+                'last_login': row[5],
+                'login_count': row[6],
+                'is_active': row[7]
+            }
+        return None
+    
+    def create_user_with_password(self, email, name, password_hash):
+        """Create a new user with password authentication"""
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        
+        try:
+            cursor.execute('''
+                INSERT INTO users (email, name, password_hash, last_login, login_count) 
+                VALUES (?, ?, ?, CURRENT_TIMESTAMP, 1)
+            ''', (email, name, password_hash))
+            user_id = cursor.lastrowid
+            conn.commit()
+            conn.close()
+            return user_id
+        except sqlite3.IntegrityError:
+            # User already exists
+            conn.close()
+            return None
+    
+    def update_user_login(self, user_id):
+        """Update user login timestamp and count"""
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        cursor.execute('''
+            UPDATE users 
+            SET last_login = CURRENT_TIMESTAMP, login_count = login_count + 1 
+            WHERE id = ?
+        ''', (user_id,))
+        conn.commit()
+        conn.close()
     
     def start_user_session(self, user_id):
         """Start a new user session"""

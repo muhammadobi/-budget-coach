@@ -135,6 +135,18 @@ new_achievements = achievement_system.check_and_award_achievements(transactions_
 for achievement_id in new_achievements:
     achievement_system.show_new_achievement_notification(achievement_id)
 
+# Show notifications
+notifications = auth_manager.show_notifications()
+for notification in notifications:
+    if notification['type'] == 'success':
+        st.success(notification['message'])
+    elif notification['type'] == 'info':
+        st.info(notification['message'])
+    elif notification['type'] == 'warning':
+        st.warning(notification['message'])
+    elif notification['type'] == 'error':
+        st.error(notification['message'])
+
 # Display user level in sidebar
 level_info, total_points = achievement_system.get_user_level()
 st.sidebar.markdown("---")
