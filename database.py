@@ -61,9 +61,15 @@ class BudgetDatabase:
             )
         ''')
         
-        # Add password_hash column if it doesn't exist (for existing databases)
+        # Add missing columns for existing databases (migrations)
         try:
             cursor.execute('ALTER TABLE users ADD COLUMN password_hash TEXT')
+        except sqlite3.OperationalError:
+            # Column already exists
+            pass
+        
+        try:
+            cursor.execute('ALTER TABLE categories ADD COLUMN color TEXT DEFAULT "#1f77b4"')
         except sqlite3.OperationalError:
             # Column already exists
             pass
