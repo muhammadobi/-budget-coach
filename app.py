@@ -559,7 +559,7 @@ elif page == "⚙️ Settings":
     st.markdown('<h1 class="main-header">⚙️ Settings & Data Management</h1>', unsafe_allow_html=True)
     
     # User Analytics (for creator)
-    if current_user['email'] == "kmuhammadobi@gmail.com":
+    if current_user['email'] == "muhammadkarangwa07@gmail.com":
         st.subheader("📊 User Analytics Dashboard")
         
         user_stats = db.get_user_stats()
