@@ -1,0 +1,112 @@
+{
+  "students": [
+    {
+      "name": "Alice Johnson",
+      "student_id": "STU001",
+      "email": "alice.johnson@school.edu",
+      "enrollment_date": "2025-08-26",
+      "grades": {
+        "Mathematics": 92.5,
+        "Science": 88.0,
+        "English": 95.5,
+        "History": 87.0,
+        "Art": 91.0
+      }
+    },
+    {
+      "name": "Bob Smith",
+      "student_id": "STU002",
+      "email": "bob.smith@school.edu",
+      "enrollment_date": "2025-08-26",
+      "grades": {
+        "Mathematics": 78.5,
+        "Science": 82.0,
+        "English": 75.0,
+        "History": 80.5,
+        "Physical Education": 95.0
+      }
+    },
+    {
+      "name": "Carol Davis",
+      "student_id": "STU003",
+      "email": "carol.davis@school.edu",
+      "enrollment_date": "2025-08-26",
+      "grades": {
+        "Mathematics": 95.0,
+        "Science": 93.5,
+        "English": 89.0,
+        "History": 92.0,
+        "Art": 88.5,
+        "Music": 96.0
+      }
+    },
+    {
+      "name": "David Wilson",
+      "student_id": "STU004",
+      "email": "david.wilson@school.edu",
+      "enrollment_date": "2025-08-26",
+      "grades": {
+        "Mathematics": 65.0,
+        "Science": 70.5,
+        "English": 68.0,
+        "History": 72.0,
+        "Physical Education": 85.0
+      }
+    },
+    {
+      "name": "Emma Brown",
+      "student_id": "STU005",
+      "email": "emma.brown@school.edu",
+      "enrollment_date": "2025-08-26",
+      "grades": {
+        "Mathematics": 88.5,
+        "Science": 91.0,
+        "English": 92.5,
+        "History": 85.0,
+        "Art": 94.0,
+        "Music": 89.0,
+        "Physical Education": 87.5
+      }
+    },
+    {
+      "name": "Frank Miller",
+      "student_id": "STU006",
+      "email": "frank.miller@school.edu",
+      "enrollment_date": "2025-08-26",
+      "grades": {
+        "Mathematics": 55.0,
+        "Science": 58.5,
+        "English": 62.0,
+        "History": 59.0
+      }
+    },
+    {
+      "name": "Grace Lee",
+      "student_id": "STU007",
+      "email": "grace.lee@school.edu",
+      "enrollment_date": "2025-08-26",
+      "grades": {
+        "Mathematics": 97.0,
+        "Science": 95.5,
+        "English": 93.0,
+        "History": 96.0,
+        "Art": 92.5,
+        "Music": 98.0
+      }
+    },
+    {
+      "name": "Henry Taylor",
+      "student_id": "STU008",
+      "email": "henry.taylor@school.edu",
+      "enrollment_date": "2025-08-26",
+      "grades": {
+        "Mathematics": 73.0,
+        "Science": 76.5,
+        "English": 71.0,
+        "Physical Education": 90.0
+      }
+    }
+  ],
+  "saved_date": "2025-08-26T20:41:46.211184",
+  "total_students": 8
+}

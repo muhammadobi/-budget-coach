@@ -1,5 +1,24 @@
-streamlit>=1.28.0
-pandas>=2.0.0
-plotly>=5.15.0
-numpy>=1.24.0
-python-dateutil>=2.8.2
+# Student Grade Manager - Python Dependencies
+# =============================================
+
+# Core Python libraries (usually included with Python)
+# - json (built-in)
+# - os (built-in)
+# - sys (built-in)
+# - datetime (built-in)
+# - typing (built-in for Python 3.5+)
+# - re (built-in)
+
+# Optional dependencies for enhanced features
+matplotlib>=3.5.0      # For data visualization and charts
+numpy>=1.21.0         # For numerical operations (used by matplotlib)
+
+# Development and testing dependencies (optional)
+# pytest>=6.2.0       # For unit testing
+# black>=22.0.0        # For code formatting
+# flake8>=4.0.0        # For code linting
+# mypy>=0.910          # For type checking
+
+# Note: This project is designed to work with Python 3.7+
+# The core functionality works without any external dependencies
+# Only matplotlib is needed for the visualization features
