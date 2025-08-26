@@ -1,0 +1,148 @@
+============================================================
+STUDENT GRADE MANAGEMENT SYSTEM - COMPREHENSIVE REPORT
+============================================================
+Generated on: 2025-08-26 20:41:46
+
+CLASS OVERVIEW
+--------------------
+Total Students: 8
+Students with Grades: 8
+Class Average: 82.33%
+Highest Grade: 95.33%
+Lowest Grade: 58.62%
+Passing Rate: 87.5%
+
+GRADE DISTRIBUTION
+--------------------
+A: 3 students (37.5%)
+B: 2 students (25.0%)
+C: 2 students (25.0%)
+D: 0 students (0.0%)
+F: 1 students (12.5%)
+
+SUBJECT PERFORMANCE
+--------------------
+Art: 91.5%
+English: 80.75%
+History: 81.64%
+Mathematics: 80.56%
+Music: 94.33%
+Physical Education: 89.38%
+Science: 81.94%
+
+TOP PERFORMERS
+--------------------
+1. Grace Lee: 95.33% (A)
+2. Carol Davis: 92.33% (A)
+3. Alice Johnson: 90.8% (A)
+4. Emma Brown: 89.64% (B)
+5. Bob Smith: 82.2% (B)
+
+INDIVIDUAL STUDENT DETAILS
+------------------------------
+
+Student: Alice Johnson
+ID: STU001
+Email: alice.johnson@school.edu
+Enrolled: 2025-08-26
+Average Grade: 90.8% (A)
+Grades by Subject:
+  Art: 91.0%
+  English: 95.5%
+  History: 87.0%
+  Mathematics: 92.5%
+  Science: 88.0%
+------------------------------
+
+Student: Bob Smith
+ID: STU002
+Email: bob.smith@school.edu
+Enrolled: 2025-08-26
+Average Grade: 82.2% (B)
+Grades by Subject:
+  English: 75.0%
+  History: 80.5%
+  Mathematics: 78.5%
+  Physical Education: 95.0%
+  Science: 82.0%
+------------------------------
+
+Student: Carol Davis
+ID: STU003
+Email: carol.davis@school.edu
+Enrolled: 2025-08-26
+Average Grade: 92.33% (A)
+Grades by Subject:
+  Art: 88.5%
+  English: 89.0%
+  History: 92.0%
+  Mathematics: 95.0%
+  Music: 96.0%
+  Science: 93.5%
+------------------------------
+
+Student: David Wilson
+ID: STU004
+Email: david.wilson@school.edu
+Enrolled: 2025-08-26
+Average Grade: 72.1% (C)
+Grades by Subject:
+  English: 68.0%
+  History: 72.0%
+  Mathematics: 65.0%
+  Physical Education: 85.0%
+  Science: 70.5%
+------------------------------
+
+Student: Emma Brown
+ID: STU005
+Email: emma.brown@school.edu
+Enrolled: 2025-08-26
+Average Grade: 89.64% (B)
+Grades by Subject:
+  Art: 94.0%
+  English: 92.5%
+  History: 85.0%
+  Mathematics: 88.5%
+  Music: 89.0%
+  Physical Education: 87.5%
+  Science: 91.0%
+------------------------------
+
+Student: Frank Miller
+ID: STU006
+Email: frank.miller@school.edu
+Enrolled: 2025-08-26
+Average Grade: 58.62% (F)
+Grades by Subject:
+  English: 62.0%
+  History: 59.0%
+  Mathematics: 55.0%
+  Science: 58.5%
+------------------------------
+
+Student: Grace Lee
+ID: STU007
+Email: grace.lee@school.edu
+Enrolled: 2025-08-26
+Average Grade: 95.33% (A)
+Grades by Subject:
+  Art: 92.5%
+  English: 93.0%
+  History: 96.0%
+  Mathematics: 97.0%
+  Music: 98.0%
+  Science: 95.5%
+------------------------------
+
+Student: Henry Taylor
+ID: STU008
+Email: henry.taylor@school.edu
+Enrolled: 2025-08-26
+Average Grade: 77.62% (C)
+Grades by Subject:
+  English: 71.0%
+  Mathematics: 73.0%
+  Physical Education: 90.0%
+  Science: 76.5%
+------------------------------
